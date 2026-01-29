@@ -52,7 +52,12 @@ def login():
         if  not user or user.password != request.form["password"]:
             error = "Invalid username or password"
         else:
+            # Can add to userInfo dict to include more info later
+            userInfo = {
+                "username": user.name
+            }
             session["logged_in"] = True
+            session["userInfo"] = userInfo
             flash("You were logged in")
             return redirect(url_for("index"))
     return render_template("login.html", error=error)
@@ -71,6 +76,10 @@ def new_user():
             return render_template("newuser.html", error="Error when adding user: " + str(e))
     else:
         return render_template("newuser.html")
+
+@app.route("/profile")
+def profile():
+    pass
 
 @app.route("/logout")
 def logout():

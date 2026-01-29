@@ -20,6 +20,7 @@
     <a class="btn btn-success" role="button" href="{{ url_for('new_user') }}">new user</a>
     {% else %}
     <a class="btn btn-warning" role="button" href="{{ url_for('logout') }}">log out</a>
+    <a class="btn btn-info" role="button" href="{{ url_for('profile') }}">My profile</a>
     {% endif %}
 
     <br /><br />
@@ -29,6 +30,9 @@
       {{ message }}
     </div>
     {% endfor %} {% if session.logged_in %}
+
+    <p>Logged in as: {{session.userInfo.username}}</p>
+
     <form action="{{ url_for('add_entry') }}" method="post" class="add-entry form-group">
       <dl>
         <dt>Title:</dt>
