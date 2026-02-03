@@ -69,7 +69,11 @@ def new_user():
         try:
             db.session.add(newuser)
             db.session.commit()
+            userInfo = {
+                "username": newuser.name
+            }
             session["logged_in"] = True
+            session["userInfo"] = userInfo
             flash("New User Created")
             return redirect(url_for("index"))
         except Exception as e:
@@ -79,6 +83,8 @@ def new_user():
 
 @app.route("/profile")
 def profile():
+    """User profile page."""
+    return render_template("profile.html")
     pass
 
 @app.route("/logout")
